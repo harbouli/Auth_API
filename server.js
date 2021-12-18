@@ -12,11 +12,11 @@ app.use(cookieParser());
 
 // CONNETION WITH DATABASE
 
-const URI = process.env.MONGODB_URI;
+const URI = process.env.MONGODB_URI_2;
 
 mongoose.connect(URI);
 mongoose.connection
-  .once("open", () => console.log("Connected to"))
+  .once("open", () => console.log("Connected to DB"))
   .on("error", (error) => {
     console.log("Connection error: ", error);
   });

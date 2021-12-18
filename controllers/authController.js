@@ -117,13 +117,13 @@ const userController = {
               message: "Please Login",
             });
 
-          const userId = User.findById(result.id);
+          const userId = await User.findById(result.id);
           if (!userId) return res.json({ message: "This User Do Not Exist" });
           const accessToken = createAccessToken({ id: result.id });
-          console.log(userId);
           return res.json({
             refreshToken: rf_Token,
             accessToken: accessToken,
+            user: userId,
           });
         }
       );
