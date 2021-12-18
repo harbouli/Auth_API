@@ -24,18 +24,19 @@ const userController = {
 
       if (!password)
         return res.status(400).json({ message: "Please Enter Password" });
-      else if (password.lenght < 6)
+      if (password.length < 6)
         return res.status(400).json({
           message: "Your password must be at least 6 characters long",
         });
 
-      const hashPassword = bcrypt.hash(password, 12);
+      const hashPassword = await bcrypt.hash(password, 12);
       const newUser = new User({
         firstname,
         lastname,
         email,
         password: hashPassword,
       });
+      console.log(newUser);
 
       return res.status(200).json({ message: "Successfully Saved All Data" });
     } catch (error) {
