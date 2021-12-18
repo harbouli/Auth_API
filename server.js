@@ -1,9 +1,8 @@
 const express = require("express");
 require("dotenv").config();
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const connectDb = require("./config/db");
 
 const app = express();
 
@@ -13,11 +12,18 @@ app.use(cookieParser());
 
 // CONNETION WITH DATABASE
 
-connectDb();
+const URI = process.env.MONGODB_URI;
 
-app.get("/", (req, res) => {
-  res.json({ msg: "Hello" });
-});
+mongoose.connect(URI);
+mongoose.connection
+  .once("open", () => console.log("Connected to"))
+  .on("error", (error) => {
+    console.log("Connection error: ", error);
+  });
+
+// Routes
+
+app.use("/api", require("./routers/authRouter"));
 
 // PORT LISTNER
 

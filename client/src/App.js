@@ -3,22 +3,17 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
+// import PageRender from "./pageRender";
 
 function App() {
   return (
     <>
-      <Navbar />
       <Router>
+        <Navbar />
         <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/Singup">
-            <Register />
-          </Route>
-          <Route exact path="/Login">
-            <Login />
-          </Route>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/Login" component={Login} />
+          <Route exact path="/Singup" component={Register} />
         </Switch>
       </Router>
     </>
